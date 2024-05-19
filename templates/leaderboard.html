@@ -4,23 +4,31 @@
     <head>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
         <link href="/static/styles.css" rel="stylesheet">
-        <title>FitPal.SFU.SURGE</title>
+        <title>SFU_SURGE_FitPal</title>
     </head>
     <body>
+        </div id = "kendrick">
+            <form action="/logout" method="get"  id = "logout" >
+                <input type="submit" value="Logout">
+            </form>
+        </div>
+        <div class="header">
+            <h1><a id = "logo" href = "/">FitPal</a></h1>
+        </div>
         <div class="container">
-            <!-- <div class="section">
+            <div class="section">
 
                 <h2>Add an entry</h2>
-                <form action="/" method="post">
-                    <input autocomplete="off" autofocus name="person_name" placeholder="Enter Name" type="text">
-                    <input autocomplete="off" autofocus name="reps" placeholder="Enter Reps" type="number">
-                    <input autocomplete="off" autofocus name="score" placeholder="Enter Score" type="number">
-                    <input type="submit" value="Add Entry">
+
+                <form action="/leaderboard" method="post">
+                    <input autocomplete="off" autofocus name="reps" placeholder="Enter Reps" type="number" min="0">
+                    <input autocomplete="off" autofocus name="score" placeholder="Enter Score" type="number" min="0">
+                    <input type="submit" value="Update">
                 </form>
 
-            </div> -->
+            </div>
 
-            <div  class="leaderboard">
+            <div class="section leaderboard">
 
                 <h2>Leaderboard</h2>
                 <table>
@@ -28,11 +36,11 @@
                         <tr>
                             <th>Username</th>
                             <th>Reps</th>
-                            </tr>
+                        </tr>
                     </thead>
 
                     <tbody>
-                        <!-- {% for user in users %}
+                        {% for user in users %}
                             <tr>
                                 <td>{{ user[1] }}</td>
                                 <td>reps: {{ user[2] }}/score: {{ user[3] }}</td>
@@ -41,28 +49,10 @@
                                         <input name="id" type="hidden" value="{{ user[0] }}">
                                         <input type="submit" value="Remove">
                                     </form>
-                                </td> 
+                                </td>
                             </tr>
-                        {% endfor %} -->
-                        <tr>
-                            <td>User 1</td>
-                            <td>reps: 10 <br></br> score: 100</td>
-                            <td><a href="/remove?id=1">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td>User 2</td>
-                            <td>reps: 8 <br></br>score: 80</td>
-                            <td><a href="/remove?id=2">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td>User 3</td>
-                            <td>reps: 1220 <br></br>score: 90</td>
-                            <td><a href="/remove?id=2">Remove</a></td>
-                        </tr>
-
+                        {% endfor %}
                     </tbody>
                 </table>
-            </div>
-        </div>
     </body>
 </html>
