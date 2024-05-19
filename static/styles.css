@@ -1,0 +1,327 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,100,300,500,700);
+@import url('https://fonts.cdnfonts.com/css/joystix');
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-y:auto;
+    background: linear-gradient(-45deg, #39c1d8, #e73c7e, #c141cd, #c042e6);
+	animation: gradient 15s ease infinite;
+    background-size: 400%, 400%;    
+    height: 100vh;
+    color: #212529;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;   
+    font-family: Raleway;
+    font-weight: normal;
+    font-style: normal;
+    color: white;
+    align-items: center;
+}
+
+.header {
+    margin-left: 20px;
+    font-weight: bold;
+    margin-top: 0px;
+}
+
+h1 {
+    margin-top: 10px;
+}
+
+h2 {
+    color: white;
+}
+
+#logo {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+#logout {
+    margin-top: 10px;
+    right: 10px;
+    position: absolute;
+}
+
+.exercises {
+    color: rgb(0, 0, 0);
+    height: 80%;
+    background-color: rgb(237, 145, 231);
+    width: 90%;
+    text-align: center;
+    align-items: center;
+    margin-left: 30px;
+    margin-top: 5%;
+}
+
+.exercises:hover {
+    background-color: rgb(216, 132, 210);
+    transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
+}
+    
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+#bicep {
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 0px;
+    font-family: 'Joystix', sans-serif;
+}
+
+#welcometext {
+    text-align: center;
+    font-size: 80px;
+    margin-bottom:0px;
+    margin-top:5%;
+}
+
+#welcomesubtext {
+    text-align: center;
+    font-size: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+
+#kendrick {
+    color: rgb(0, 0, 0);
+    height: 80%;
+    background-color: rgb(237, 145, 231);
+    width: 30%;
+    text-align: center;
+    align-items: center;
+}
+
+#kendrick input[type="text"],
+#kendrick input[type="submit"] {
+    width: 60%; /* Ensure input fields and buttons take up 100% width of the container */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+    margin-bottom: 10px; /* Add some spacing between elements */
+}
+
+.password-input {
+    -webkit-text-security: disc; /* For Chrome, Safari, and newer versions of Edge */
+    text-security: disc; /* For Firefox */
+}
+
+#buttoncontainer {
+    display:absolute;
+    position:relative;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.button-56 {    
+    left: 40%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(244, 225, 222);
+    border: 2px solid #111;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #111;
+    cursor: pointer;
+    font-family: Inter,sans-serif;
+    font-size: 16px;
+    height: 48px;
+    line-height: 24px;
+    width: 20%;
+    padding: 0 25px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    position:absolute;
+    margin-top: 5%;
+}
+
+.button-56:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+}
+
+.button-56:hover:after {
+  transform: translate(0, 0);
+}
+
+.button-56:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+.button-56:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  .button-56 {
+    padding: 0 40px;
+  }
+}
+
+#footer {
+    font-size: 10px;
+    margin: 0px;
+    padding: 0px;
+    bottom: 0px;
+    position: absolute;
+    text-align: center;
+}
+
+.container {
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+    width: 90%;
+}
+
+.containerleaderboard {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+    width: 90%;
+}
+    
+.section {
+    padding: 0px;
+    padding-top: 20px;
+}
+
+.leaderboard {
+    color: rgb(0, 0, 0);
+    height: 80%;
+    background-color: rgb(237, 145, 231);
+    width: 90%;
+    text-align: center;
+    align-items: center;
+    margin-right: 30px;
+    margin-top: 5%;
+}
+
+.leaderboard:hover {
+    background-color: rgb(216, 132, 210);
+    transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
+}
+    
+    
+input[type="submit"] {
+    border-radius: 0.25rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 0.375rem 0.75rem;
+    text-align: center;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    vertical-align: middle;
+    background-color: rgb(244, 225, 222);
+    border: 2px solid #111;
+    box-sizing: border-box;
+    color: #111;
+    cursor: pointer;
+    font-family: Inter,sans-serif;
+    height: 48px;
+    line-height: 24px;
+    max-width: 100%;
+    padding: 0 25px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transform: scale(0.75);
+}
+
+input[type="submit"]:after {
+    background-color: #111;
+    border-radius: 8px;
+    content: "";
+    display: block;
+    height: 48px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    top: -2px;
+    transform: translate(8px, 8px);
+    transition: transform .2s ease-out;
+    z-index: 0;
+}
+
+input[type="submit"]:hover:after {
+    transform: translate(0, 0);
+}
+  
+input[type="submit"]:active {
+    background-color: #ffdeda;
+    outline: 0;
+}
+  
+input[type="submit"]:hover {
+    outline: 0;
+}
+
+input[type="text"], input[type="number"] {
+    line-height: 1.8;
+    width: 25%;
+}
+    
+input[type="text"]:hover, input[type="number"]:hover {
+    background-color: #f5f5f5;
+    transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+table {
+    background-color: transparent;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+    
+table th,
+table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+}
+    
+tbody tr:nth-of-type(odd) {
+    background-color: rgb(179, 208, 255, 0.3)
+}
+
+.devform {
+    transform: scale(0.2); /* Scale down by 25% */
+    transform-origin: top left; 
+    align-items: right;
+    position: absolute;
+}
