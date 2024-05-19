@@ -23,12 +23,6 @@ Session(app)
 
 
 
-
-
-# DATABASE_URL = "postgresql://postgres:Q7q8q94-20050501@localhost/public.users"
-
-
-
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -97,16 +91,9 @@ def login():
             return render_template("apology.html")
 
 
-        
         with sqlite3.connect("users.db") as conn:
             cursor = conn.cursor()
             rows = cursor.execute("SELECT * FROM users WHERE username = ?", (request.form.get("username"),)).fetchall()
-
-        """
-        with psycopg2.connect(DATABASE_URL) as conn:
-            cursor = conn.cursor()
-            rows = cursor.execute("SELECT * FROM users WHERE username = ?", (request.form.get("username"),)).fetchall()
-        """
 
 
         if len(rows) != 1 or not check_password_hash(rows[0][4], request.form.get("password")):
@@ -136,32 +123,19 @@ def register():
             return render_template("apology.html")
 
 
-        
         with sqlite3.connect("users.db") as conn:
             cursor = conn.cursor()
             rows = cursor.execute("SELECT * FROM users WHERE username = ?", (request.form.get("register_username"),)).fetchall()
-        """
-        with psycopg2.connect(DATABASE_URL) as conn:
-            cursor = conn.cursor()
-            rows = cursor.execute("SELECT * FROM users WHERE username = ?", (request.form.get("register_username"),)).fetchall()
-        """
 
 
         if len(rows) != 0:
             return render_template("failed_register.html")
         
 
-        
         with sqlite3.connect("users.db") as conn:
             cursor = conn.cursor()
             rows = cursor.execute("INSERT INTO users (username, reps, score, password, total_reps) VALUES (?, ?, ?, ?, ?)", (request.form.get("register_username"), 0, 0, generate_password_hash(request.form.get("register_password")), 0))
             conn.commit()
-        """
-        with psycopg2.connect(DATABASE_URL) as conn:
-            cursor = conn.cursor()
-            rows = cursor.execute("INSERT INTO users (username, reps, score, password) VALUES (?, ?, ?, ?)", (request.form.get("register_username"), 0, 0, generate_password_hash(request.form.get("register_password"))))
-            conn.commit()
-        """
 
 
         return redirect("/login")
@@ -199,27 +173,16 @@ def leaderboard():
         except ValueError:
             return redirect("/")
 
-        
         with sqlite3.connect("users.db") as conn:
             cursor = conn.cursor()
             total_reps = cursor.execute("SELECT total_reps FROM users WHERE username = ?", (session["name"],)).fetchone()
             cursor.execute("UPDATE users SET reps = ?, score = ?, total_reps = ? WHERE username = ?;", (reps, score, total_reps[0] + reps, session["name"]))
             conn.commit()
-        """
-
-        with psycopg2.connect(DATABASE_URL) as conn:
-            cursor = conn.cursor()
-            cursor.execute("UPDATE users SET reps = ?, score = ? WHERE username = ?;", (reps, score, session["name"]))
-            conn.commit()
-        """
-        
-        
 
         return redirect("/leaderboard")
 
     else:
 
-        
         with sqlite3.connect("users.db") as conn:
             cursor = conn.cursor()
             rows = cursor.execute("SELECT * FROM users ORDER BY reps DESC;").fetchall()
@@ -239,19 +202,10 @@ def leaderboard():
 def remove():
     id = request.form.get("id")
     if id:
-        
         with sqlite3.connect("users.db") as conn:
             cursor = conn.cursor()
             cursor.execute("DELETE FROM users WHERE id = ?", (id))
             conn.commit()
-        """
-        
-        with psycopg2.connect(DATABASE_URL) as conn:
-            cursor = conn.cursor()
-            cursor.execute("DELETE FROM users WHERE id = ?", (id))
-            conn.commit()
-        """
-
     return redirect("/leaderboard")
 
 

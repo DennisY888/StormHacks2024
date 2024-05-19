@@ -50,13 +50,13 @@ def speak(text):
     
     threading.Thread(target=play_sound).start()
 
-"""
+
 def play_satisfying_sound():
     def play_sound():
         playsound("models/coin.mp3")  # Path to your satisfying sound file
     
     threading.Thread(target=play_sound).start()
-"""
+
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -139,7 +139,7 @@ while cap.isOpened():
             if count_rep:
                 rep_count += 1
                 print(f"Rep count: {rep_count}")
-                # play_satisfying_sound()
+                play_satisfying_sound()
             else:
                 count_rep = True
             down_position = False

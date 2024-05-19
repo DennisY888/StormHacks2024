@@ -2,8 +2,8 @@ import cv2
 import mediapipe as mp
 import numpy as np
 from gtts import gTTS
-import os
 from playsound import playsound
+import os
 import threading
 import sqlite3
 import sys
@@ -51,12 +51,12 @@ def speak(text):
     
     threading.Thread(target=play_sound).start()
 
-"""
+
 def play_satisfying_sound():
     def play_sound():
-        playsound("coin.mp3")  # Path to your satisfying sound file
+        playsound("models/coin.mp3")  # Path to your satisfying sound file
     threading.Thread(target=play_sound).start()
-"""
+
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -161,7 +161,7 @@ while cap.isOpened():
         #print(f"Left Elbow Angle: {left_elbow_angle:.2f}, Right Elbow Angle: {right_elbow_angle:.2f}")
 
         #Check if elbows are bent to around 90 degrees for down position
-        if (left_elbow_angle < 95 or right_elbow_angle < 95) and (left_elbow[1] or right_elbow[1] < nose[1]):
+        if (left_elbow_angle < 95 and right_elbow_angle < 95) and (left_elbow[1] < nose[1] and right_elbow[1] < nose[1]):
             if not down_position:
                 down_position = True
                 #print("Down position detected")
@@ -175,7 +175,7 @@ while cap.isOpened():
             else: 
                 rep_count += 1
                 print(f"Rep count: {rep_count}")
-                #play_satisfying_sound()
+                play_satisfying_sound()
             down_position = False
     
         # Draw landmarks on the frame
