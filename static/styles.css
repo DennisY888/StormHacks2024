@@ -1,13 +1,120 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,100,300,500,700);
+
+
 body {
-    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    overflow:hidden;
+    /* background: linear-gradient(-45deg, #39c1d8, #e73c7e, #c141cd, #c042e6); */
+	animation: gradient 15s ease infinite;
+    background-size: 400%, 400%;
+    height: 100vh;
     color: #212529;
     font-size: 1rem;
     font-weight: 400;
-    line-height: 1.5;
-    margin: 0;
-    text-align: left;
+    line-height: 1.5;   
+    font-family: Raleway;
+    font-weight: normal;
+    font-style: normal;
+    color: white;
 }
-    
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+#welcometext {
+    text-align: center;
+    font-size: 80px;
+    margin-bottom:0px;
+}
+
+#welcomesubtext {
+    text-align: center;
+    font-size: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.button-56 {
+  align-items: center;
+  background-color: rgb(244, 225, 222);
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  position:absolute;
+  left: 45%;
+  margin-top: 10%;
+}
+
+.button-56:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+}
+
+.button-56:hover:after {
+  transform: translate(0, 0);
+}
+
+.button-56:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+.button-56:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  .button-56 {
+    padding: 0 40px;
+  }
+}
+
+#footer {
+    font-size: 10px;
+    margin: 0px;
+    padding: 0px;
+    bottom: 0;
+    position: absolute;
+    text-align: center;
+}
+
 .container {
     margin-left: auto;
     margin-right: auto;
@@ -17,30 +124,25 @@ body {
     width: 90%;
 }
     
-.header {
-    background-color: #bf2dcd;
-    color: #fff;
-    margin-bottom: 2rem;
-    padding: 2rem 1rem;
-    text-align: center;
-}
-    
 .section {
     padding-bottom: 1rem;
     padding-left: 2rem;
     padding-right: 2rem;
     padding-top: 0.5rem;
 }
-    
-.section:hover {
-    background-color: #f5f5f5;
+
+.leaderboard {
+    background-color: #212529;
+    width: 25%;
+    align-items: left;
+    position:absolute;
+}
+
+.leaderboard:hover {
+    background-color: #000000;
     transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
 }
     
-h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 48px;
-}
     
 button, input[type="submit"] {
     background-color: #d9edff;

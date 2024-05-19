@@ -23,7 +23,6 @@ def after_request(response):
 def index():
 
     if request.method == "POST":
-
         name = request.form.get("person_name")
         if not name:
             return redirect("/")
@@ -41,11 +40,13 @@ def index():
         return redirect("/")
 
     else:
-
         with sqlite3.connect("users.db") as conn:
             cursor = conn.cursor()
             rows = cursor.execute("SELECT * FROM users ORDER BY reps DESC").fetchall()
         return render_template("index.html", users=rows)
+    
+
+    
 
 @app.route("/remove", methods=["POST"])
 def remove():
@@ -57,6 +58,9 @@ def remove():
             conn.commit()
     return redirect("/")
 
+@app.route("/leaderboard")
+def leaderboard():
+    return render_template("leaderboard.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
