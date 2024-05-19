@@ -7,11 +7,16 @@
         <title>SFU_SURGE_FitPal</title>
     </head>
     <body>
-        <div class="header">
-            <h1>FitPal</h1>
+        </div id = "kendrick">
+            <form action="/logout" method="get"  id = "logout" >
+                <input type="submit" value="Logout">
+            </form>
         </div>
-        <div class="container">
-            <div class="section">
+        <div class="header">
+            <h1><a id = "logo" href = "/">FitPal</a></h1>
+        </div>
+        <div class="containerleaderboard">
+            <!-- <div class="section">
 
                 <h2>Add an entry</h2>
 
@@ -21,9 +26,8 @@
                     <input type="submit" value="Update">
                 </form>
 
-            </div>
-
-            <div class="section">
+            </div> -->
+            <div class="section1 leaderboard">
 
                 <h2>Leaderboard</h2>
                 <table>
@@ -50,12 +54,31 @@
                     </tbody>
                 </table>
             </div>
-                <form action="/logout" method="get">
-                    <input type="submit" value="Logout">
-                </form>
-            <div>
-
-            </div>
-        </div>
+            <div class="section1 exercises">
+                <h2>Excercises</h2>
+                <table>
+                    <thead>
+                    </thead>
+    
+                    <tbody>
+                            <tr>
+                                <td>
+                                    <!-- Pushups Button -->
+                                    <form action="/logout" method="get"  id = "pushups" >
+                                        <input type="submit" value="Pushups">
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!-- Squats Button -->
+                                    <form action="/logout" method="get"  id = "squats" >
+                                        <input type="submit" value="Squats">
+                                    </form>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+                </div>
     </body>
 </html>
