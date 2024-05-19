@@ -158,6 +158,8 @@ body {
 }
 
 .container {
+    justify-content: center;
+    display: flex;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
@@ -173,11 +175,16 @@ body {
 }
 
 .leaderboard {
-    background-color:#212529;
-    margin-bottom: 20px;
+    color: rgb(0, 0, 0);
+    height: 80%;
+    background-color: rgb(237, 145, 231);
+    width: 90%;
+    text-align: center;
+    align-items: center;
 }
+
 .leaderboard:hover {
-    background-color: #131313;
+    background-color: rgb(216, 132, 210);
     transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
 }
     
