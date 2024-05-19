@@ -128,7 +128,7 @@ def leaderboard():
             reps = int(request.form.get("reps"))
             score = int(request.form.get("score"))
         except ValueError:
-            return redirect("/")
+            return redirect("/leaderboard")
 
         with sqlite3.connect("users.db") as conn:
             cursor = conn.cursor()
