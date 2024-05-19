@@ -7,6 +7,7 @@
         <title>SFU_SURGE_FitPal</title>
     </head>
     <body>
+        <p id = "bicep">&#x1F4AA:{{coins}}</p>
         </div id = "kendrick">
             <form action="/logout" method="get"  id = "logout" >
                 <input type="submit" value="Logout">
@@ -29,12 +30,12 @@
             </div> -->
             <div class="section1 leaderboard">
 
-                <h2>Leaderboard</h2>
+                <h2>All-time Leaderboard</h2>
                 <table>
                     <thead>
                         <tr>
                             <th>Username</th>
-                            <th>Reps</th>
+                            <th>Highest Record</th>
                         </tr>
                     </thead>
 
@@ -42,7 +43,7 @@
                         {% for user in users %}
                             <tr>
                                 <td>{{ user[1] }}</td>
-                                <td>reps: {{ user[2] }}/score: {{ user[3] }}</td>
+                                <td>reps: {{ user[2] }}</td>
                                 <td>
                                     <form action="/remove" method="post">
                                         <input name="id" type="hidden" value="{{ user[0] }}">
@@ -64,7 +65,7 @@
                             <tr>
                                 <td>
                                     <!-- Pushups Button -->
-                                    <form action="/logout" method="get"  id = "pushups" >
+                                    <form action="/push" method="post"  id = "pushups" >
                                         <input type="submit" value="Pushups">
                                     </form>
                                 </td>
@@ -72,7 +73,7 @@
                             <tr>
                                 <td>
                                     <!-- Squats Button -->
-                                    <form action="/logout" method="get"  id = "squats" >
+                                    <form action="/squat" method="post"  id = "squats" >
                                         <input type="submit" value="Squats">
                                     </form>
                                 </td>

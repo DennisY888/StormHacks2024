@@ -2,15 +2,26 @@ from functools import wraps
 import os
 
 import sqlite3
-from flask import Flask, flash, jsonify, redirect, render_template, request, session
+from flask import Flask, flash, jsonify, redirect, render_template, request, session, Response
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
+import subprocess
+# from push_ups import rep_count
+
 
 
 # Configure application
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = os.urandom(24)
+
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+
+
+
+
 
 def login_required(f):
     @wraps(f)
@@ -30,6 +41,38 @@ def after_request(response):
     response.headers["Expires"] = 0
     response.headers["Pragma"] = "no-cache"
     return response
+
+
+
+
+
+
+@app.route("/push", methods=["POST"])
+def push():
+    try:
+        # Replace 'push_ups.py' with the correct path to your Python script
+        subprocess.run(["python", "push_ups.py"], check=True)
+        return redirect("/leaderboard")
+    except subprocess.CalledProcessError as e:
+        return render_template("apology.html")
+    
+
+
+
+@app.route("/squat", methods=["POST"])
+def squat():
+    try:
+        # Replace 'push_ups.py' with the correct path to your Python script
+        subprocess.run(["python", "squats.py"], check=True)
+        return redirect("/leaderboard")
+    except subprocess.CalledProcessError as e:
+        return render_template("apology.html")
+
+
+
+
+
+
 
 
 
@@ -57,6 +100,9 @@ def login():
             return render_template("apology.html")
 
         session["name"] = rows[0][1]
+        
+        with open("rep_count.txt", "w") as file:
+            file.write(str(session["name"]))
 
         return redirect("/leaderboard")
 
@@ -88,7 +134,7 @@ def register():
 
         with sqlite3.connect("users.db") as conn:
             cursor = conn.cursor()
-            rows = cursor.execute("INSERT INTO users (username, reps, score, password) VALUES (?, ?, ?, ?)", (request.form.get("register_username"), 0, 0, generate_password_hash(request.form.get("register_password"))))
+            rows = cursor.execute("INSERT INTO users (username, reps, score, password, total_reps) VALUES (?, ?, ?, ?, ?)", (request.form.get("register_username"), 0, 0, generate_password_hash(request.form.get("register_password")), 0))
             conn.commit()
 
 
@@ -103,6 +149,8 @@ def register():
 @app.route("/logout")
 @login_required
 def logout():
+    with open("rep_count.txt", "w") as file:
+        file.write("")
     session.clear()
     return redirect("/login")
 
@@ -123,11 +171,12 @@ def leaderboard():
             reps = int(request.form.get("reps"))
             score = int(request.form.get("score"))
         except ValueError:
-            return redirect("/leaderboard")
+            return redirect("/")
 
         with sqlite3.connect("users.db") as conn:
             cursor = conn.cursor()
-            cursor.execute("UPDATE users SET reps = ?, score = ? WHERE username = ?;", (reps, score, session["name"]))
+            total_reps = cursor.execute("SELECT total_reps FROM users WHERE username = ?", (session["name"],)).fetchone()
+            cursor.execute("UPDATE users SET reps = ?, score = ?, total_reps = ? WHERE username = ?;", (reps, score, total_reps[0] + reps, session["name"]))
             conn.commit()
 
         return redirect("/leaderboard")
@@ -136,8 +185,14 @@ def leaderboard():
 
         with sqlite3.connect("users.db") as conn:
             cursor = conn.cursor()
-            rows = cursor.execute("SELECT * FROM users ORDER BY reps DESC").fetchall()
-        return render_template("leaderboard.html", users=rows)
+            rows = cursor.execute("SELECT * FROM users ORDER BY reps DESC;").fetchall()
+            total_reps = cursor.execute("SELECT total_reps FROM users WHERE username = ?;", (session["name"],)).fetchone()
+            if total_reps is not None:
+                return render_template("leaderboard.html", users=rows, coins=total_reps[0])
+            else:
+                return render_template("leaderboard.html", users=rows, coins=0)
+
+        
 
 
 
@@ -156,3 +211,6 @@ def remove():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+

@@ -5,6 +5,8 @@ from gtts import gTTS
 import os
 from playsound import playsound
 import threading
+import sqlite3
+import sys
 
 # Initialize MediaPipe pose detection with confidence thresholds
 mp_pose = mp.solutions.pose
@@ -49,11 +51,12 @@ def speak(text):
     
     threading.Thread(target=play_sound).start()
 
+"""
 def play_satisfying_sound():
     def play_sound():
         playsound("coin.mp3")  # Path to your satisfying sound file
-    
     threading.Thread(target=play_sound).start()
+"""
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -158,7 +161,7 @@ while cap.isOpened():
         #print(f"Left Elbow Angle: {left_elbow_angle:.2f}, Right Elbow Angle: {right_elbow_angle:.2f}")
 
         #Check if elbows are bent to around 90 degrees for down position
-        if left_elbow_angle < 95 and right_elbow_angle < 95:
+        if (left_elbow_angle < 95 or right_elbow_angle < 95) and (left_elbow[1] or right_elbow[1] < nose[1]):
             if not down_position:
                 down_position = True
                 #print("Down position detected")
@@ -172,7 +175,7 @@ while cap.isOpened():
             else: 
                 rep_count += 1
                 print(f"Rep count: {rep_count}")
-                play_satisfying_sound()
+                #play_satisfying_sound()
             down_position = False
     
         # Draw landmarks on the frame
@@ -188,8 +191,33 @@ while cap.isOpened():
         break
 
 # When everything is done, release the capture and close the window
-cap.release()
-cv2.destroyAllWindows()
+try:
+    cap.release()
+except Exception as e:
+    print(f"Error releasing video capture: {e}")
+
+try:
+    cv2.destroyAllWindows()
+except Exception as e:
+    print(f"Error destroying all windows: {e}")
+
+
+with sqlite3.connect("users.db") as conn:
+    cursor = conn.cursor()
+
+    with open("rep_count.txt", "r") as file:
+        username = file.read().strip()
+
+    total_reps = cursor.execute("SELECT total_reps FROM users WHERE username = ?;", (username,)).fetchone()
+    previous_attempt = cursor.execute("SELECT reps FROM users WHERE username = ?;", (username,)).fetchone()
+    if (rep_count >= previous_attempt[0]):
+        cursor.execute("UPDATE users SET reps = ?, total_reps = ? WHERE username = ?;", (rep_count, total_reps[0] + rep_count, username))
+    else:
+        cursor.execute("UPDATE users SET total_reps = ? WHERE username = ?;", (total_reps[0] + rep_count, username))
+    conn.commit()
+
+
 
 percentage = str(int(rep_count/total_count*100)) + '%'
 print(percentage)
+

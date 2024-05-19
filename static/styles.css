@@ -1,12 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,100,300,500,700);
-
+@import url('https://fonts.cdnfonts.com/css/joystix');
 
 body {
     margin: 0;
     padding: 0;
     overflow-y:auto;
-    background: linear-gradient(-45deg, #39c1d8, #e73c7e, #c141cd, #c042e6);
-    /* background-color: purple; */
+    /* background: linear-gradient(-45deg, #39c1d8, #e73c7e, #c141cd, #c042e6); */
+    background-color: purple;
 	animation: gradient 15s ease infinite;
     background-size: 400%, 400%;    
     height: 100vh;
@@ -48,13 +48,6 @@ h2 {
     position: absolute;
 }
 
-#pushups {
-}
-
-#squats {
-}
-
-
 .exercises {
     color: rgb(0, 0, 0);
     height: 80%;
@@ -83,11 +76,18 @@ h2 {
 	}
 }
 
+#bicep {
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 0px;
+    font-family: 'Joystix', sans-serif;
+}
 
 #welcometext {
     text-align: center;
     font-size: 80px;
     margin-bottom:0px;
+    margin-top:5%;
 }
 
 #welcomesubtext {
@@ -118,21 +118,29 @@ h2 {
     text-security: disc; /* For Firefox */
 }
 
-.button-56 {
+#buttoncontainer {
+    display:absolute;
+    position:relative;
+    justify-content: center;
     align-items: center;
+    height: 100px;
+}
+
+.button-56 {    
+    left: 40%;
+    align-items: center;
+    justify-content: center;
     background-color: rgb(244, 225, 222);
     border: 2px solid #111;
     border-radius: 8px;
     box-sizing: border-box;
     color: #111;
     cursor: pointer;
-    display: flex;
     font-family: Inter,sans-serif;
     font-size: 16px;
     height: 48px;
-    justify-content: center;
     line-height: 24px;
-    max-width: 100%;
+    width: 20%;
     padding: 0 25px;
     position: relative;
     text-align: center;
@@ -141,8 +149,7 @@ h2 {
     -webkit-user-select: none;
     touch-action: manipulation;
     position:absolute;
-    left: 45%;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 .button-56:after {
