@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>FitPal.SFU.SURGE</title>
+    </head>
+    <body>
+        <div class="header">
+            <h1>FitPal</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+
+                <h2>Add an entry</h2>
+
+                <form action="/" method="post">
+                <input autocomplete="off" autofocus name="person_name" placeholder="Enter Name" type="text">
+                <input autocomplete="off" autofocus name="reps" placeholder="Enter Reps" type="number">
+                <input autocomplete="off" autofocus name="score" placeholder="Enter Score" type="number">
+                <input type="submit" value="Add Entry">
+                </form>
+
+            </div>
+
+        <div class="section">
+
+            <h2>Leaderboard</h2>
+            <table>
+            <thead>
+            <tr>
+            <th>Username</th>
+            <th>Reps</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for user in users %}
+            <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.reps }}/{{ user.score }}</td>
+            <td>
+            <form action="/remove" method="post">
+            <input name="id" type="hidden" value="{{ user.id }}">
+            <input type="submit" value="Remove">
+            </form>
+            </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+            </div>
+        </div>
+    </body>
+</html>
